@@ -15,7 +15,7 @@ class TaskRepository(TaskRepositoryInterface):
     def __init__(self, file_path: str = pathlib.Path.cwd() / "./data/tasks.csv"):
         self.file_path = file_path
 
-    def load_all(self):
+    def load_all(self) -> List[Task]:
         """tasks.csvが無い時は空のリストを返す"""
         if not os.path.exists(self.file_path):
             return []
