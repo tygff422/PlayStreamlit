@@ -11,5 +11,6 @@ uv run python -m src.run
 ## テスト確認コマンド
 uv run python -m pytest tests/test_models.py -sv
 uv run python -m pytest tests/test_repositories.py -sv
-
+uv run python -m pytest tests/test_managers.py -sv
+uv run python -m pytest tests/test_integration.py -sv
 

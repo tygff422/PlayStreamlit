@@ -5,9 +5,9 @@ from src.models import Task
 
 class TaskRepositoryInterface(ABC):
     @abstractmethod
-    def save_all(self, tasks: List[Task]) -> None:
+    def load_all(self) -> List[Task]:
         pass
 
     @abstractmethod
-    def load_all(self) -> List[Task]:
+    def save_all(self, tasks: List[Task]) -> None:
         pass

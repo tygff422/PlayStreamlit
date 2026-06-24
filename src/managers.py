@@ -39,23 +39,24 @@ class TaskManager:
     def toggle_active(self, task_id: int, is_active: bool):
         """タスクのアクティブ状態を切り替える（非アクティブ化 / 再アクティブ化）"""
         for task in self.tasks:
-            if task.task_id == task_id:
-                task.is_active = is_active
-                if is_active:
-                    # 再アクティブ化の時は、進捗を0%に戻す（お兄ちゃんの要望ね！）
-                    task.progress = 0
-                    task.status = "未着手"
-                    print(
-                        f"【システム】ID:{task_id} のタスクを再アクティブ化しました（通常一覧へ復帰）。"
-                    )
-                else:
-                    task.progress = 100
-                    task.status = "完了"
-                    print(
-                        f"【システム】ID:{task_id} のタスクを非アクティブ化しました（履歴へ移動）。"
-                    )
-                self.repository.save_all(self.tasks)
+            if task.task_id != task_id:
                 return
+            task.is_active = is_active
+            if is_active:
+                # 再アクティブ化の時は、進捗を0%に戻す（お兄ちゃんの要望ね！）
+                task.progress = 0
+                task.status = "未着手"
+                print(
+                    f"【システム】ID:{task_id} のタスクを再アクティブ化しました（通常一覧へ復帰）。"
+                )
+            else:
+                task.progress = 100
+                task.status = "完了"
+                print(
+                    f"【システム】ID:{task_id} のタスクを非アクティブ化しました（履歴へ移動）。"
+                )
+            self.repository.save_all(self.tasks)
+            return
         print(f"【エラー】ID:{task_id} のタスクが見つかりません。")
 
     def delete_task(self, task_id: int):
